@@ -40,7 +40,7 @@ typedef struct {
     char id[7];
     char nom[50];
     char prenom[50];
-    char code[8];
+    //char code[8];
     compte *cpmt;
 } client;
 
@@ -113,7 +113,7 @@ void historique_compte(char *idclient, tableclient *tcl) {
     }
 }
 
-void supprimerCompte(char *idclient, tableclient **tcl, char *codesecret) {
+void supprimerCompte(char *idclient, tableclient **tcl) {
     if (*tcl == NULL) {
         printf("No clients to delete.\n");
         return;
@@ -225,9 +225,11 @@ int main() {
 
         switch (choix) {
             case 1:
+                //ajouter un compte et client
                 ajouter_client(&table_client);
                 break;
             case 2:
+                //gerer les transaction
                 printf("Enter Client ID: ");
                 scanf("%6s", id_client);
                 printf("Enter Deposit Amount: ");
@@ -235,6 +237,7 @@ int main() {
                 versement_Compte(id_client, montant, table_client);
                 break;
             case 3:
+                //gerer les transaction
                 printf("Enter Client ID: ");
                 scanf("%6s", id_client);
                 printf("Enter Withdrawal Amount: ");
@@ -242,27 +245,30 @@ int main() {
                 retrait_Compte(id_client, montant, table_client);
                 break;
             case 4:
+               //supprime un compte
                 printf("Enter Client ID: ");
                 scanf("%6s", id_client);
-                printf("Enter Secret Code: ");
-                scanf("%7s", code);
-                supprimerCompte(id_client, &table_client, code);
+                supprimerCompte(id_client, &table_client);
                 break;
             case 5:
+                //affichage les information dun client
                 printf("Enter Client ID: ");
                 scanf("%6s", id_client);
                 afficherDetailsCompte(id_client, table_client);
                 break;
             case 6:
+                //affichage de liste de client
                 afficherListeClients(table_client);
                 break;
             case 7:
+                //la tache qu'on doit ajoute 
+                //la tache est d'affichier the historique de transaction du compte
                 printf("Enter Client ID: ");
                 scanf("%6s", id_client);
                 historique_compte(id_client, table_client);
                 break;
             case 0:
-                printf("Au revoir!\n");
+                printf("Merci ,pour utiliser notre service!\n");
                 break;
             default:
                 printf("Choix invalide. Veuillez réessayer.\n");
@@ -274,3 +280,4 @@ int main() {
 
     return 0;
 }
+
